@@ -4,7 +4,7 @@
 
 本專案是一個功能完整的網頁版祖瑪 (Zuma) 風格遊戲。完全使用 **HTML、CSS 和原生 JavaScript** 從零開始打造，這個遊戲原型展示了一個完整的遊戲循環、物理模擬、動態 UI 界面，以及一個強大的自訂關卡編輯器。
 
-([**點擊這裡，立即體驗線上 Demo！**](https://kaigiii.github.io/Zuma-by-Kaigiii/))
+[**點擊這裡，立即體驗線上 Demo！**](https://kaigiii.github.io/Zuma-online-by-Kaigiii/)
 
 ---
 
