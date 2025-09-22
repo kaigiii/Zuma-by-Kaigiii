@@ -699,6 +699,10 @@ class Game {
           }
         }
       }
+      // Win condition: no balls remain after all spawns completed
+      if (this.spawningComplete && this.balls.length === 0) {
+        this.gameWon = true;
+      }
     }
 
     // Update timer display always
