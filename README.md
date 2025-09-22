@@ -1,4 +1,4 @@
-# Zuma Clone - 網頁版遊戲原型
+# Zuma online
 
 ## 專案總覽
 
