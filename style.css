@@ -1,0 +1,356 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: #121212;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+#gameCanvas {
+  /* Size is controlled in JS; keep element intrinsic size minimal */
+  display: block;
+}
+
+#settings-panel {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: sans-serif;
+  margin: 16px 0 12px 0;
+}
+#settings-panel .row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+#settings-panel label {
+  min-width: 120px;
+}
+#settings-panel input[type="range"] {
+  width: 220px;
+}
+#settings-panel button {
+  width: 100%;
+  padding: 10px 12px;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#settings-panel button:hover {
+  background: #0d47a1;
+}
+
+/* Return to menu hint (drawn on canvas textually; class reserved if needed) */
+.return-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+}
+
+/* Custom Level Editor */
+#custom-level-editor {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 12px 0 0 0;
+  border: 1px solid #444;
+}
+#custom-level-editor h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#help-button {
+  padding: 4px 8px;
+  border-radius: 50%;
+  border: 1px solid #666;
+  background: #2e7d32;
+  color: #fff;
+  cursor: pointer;
+}
+#custom-level-editor .row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+#custom-level-editor input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1f1f1f;
+  color: #fff;
+}
+.error-message {
+  color: #ff5252;
+  margin-top: 8px;
+}
+#level-select-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #121212;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+#level-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 12px 20px 8px 20px;
+}
+
+#level-buttons-container button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background-color: #333;
+  color: white;
+  border: 2px solid #555;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#level-buttons-container button:hover {
+  background-color: #4CAF50;
+  border-color: #81C784;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Splash screen */
+#splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: radial-gradient(circle at center, #1e1e1e 0%, #0d0d0d 70%);
+  z-index: 200;
+}
+#splash-screen h1 {
+  font-size: 18vw;
+  margin: 0 0 10px 0;
+}
+#splash-screen p {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+/* In-game UI overlay */
+#game-ui-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: block;
+  padding: 10px 14px;
+  z-index: 120;
+  pointer-events: none;
+}
+#back-to-menu-button {
+  pointer-events: auto;
+  padding: 8px 12px;
+  background: #424242;
+  color: #fff;
+  border: 1px solid #616161;
+  border-radius: 6px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 14px;
+}
+#back-to-menu-button:hover {
+  background: #616161;
+}
+#timer {
+  pointer-events: none;
+  color: #fff;
+  font-family: monospace;
+  font-size: 18px;
+  margin-right: 10px;
+  position: absolute;
+  top: 10px;
+  right: 14px;
+}
+#level-select-screen .title-header {
+  margin-bottom: 12px;
+}
+#level-select-screen .main-title {
+  display: block;
+  text-align: center;
+  font-size: 72px;
+  font-weight: 700;
+}
+#level-select-screen .sub-title {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  color: #bbb;
+}
+
+.designer-credit-menu {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  font-family: sans-serif;
+}
+
+#designer-credit {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  font-family: sans-serif;
+}
+
+/* Help Modal */
+#help-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+}
+#help-modal .modal-content {
+  background: #fff;
+  color: #222;
+  border-radius: 10px;
+  padding: 20px 24px;
+  max-width: 720px;
+  width: 90%;
+  position: relative;
+}
+#help-modal .close-button {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+#help-modal h2 { margin-top: 0; }
+#help-modal h3 { margin-bottom: 6px; }
+#help-modal p, #help-modal li { line-height: 1.6; }
+#help-modal code { background: #f5f5f5; padding: 2px 4px; border-radius: 4px; }
+
+/* Highlight selected level button */
+#level-buttons-container button.selected {
+  background-color: #4CAF50;
+  border-color: #81C784;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(129, 199, 132, 0.7);
+}
+
+/* Game over screen */
+#game-over-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 150;
+}
+#game-over-screen .message-box {
+  background: #1e1e1e;
+  color: #fff;
+  padding: 24px 28px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 320px;
+}
+#game-over-screen .buttons {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+#game-over-screen button {
+  padding: 10px 14px;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#game-over-screen button#return-to-menu-button {
+  background: #1976d2;
+}
+#game-over-screen button:hover {
+  filter: brightness(1.1);
+}
+
+#settings-panel .row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+#settings-panel label {
+  min-width: 100px;
+}
+
+#settings-panel input[type="range"] {
+  width: 160px;
+}
+
+#settings-panel button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#settings-panel button:hover {
+  background: #1b5e20;
+}
+
+
